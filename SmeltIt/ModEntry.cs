@@ -107,8 +107,6 @@ namespace SmeltIt
             action.MinutesUntilReady = GetConfigValue(action.Id)
                 ? 0
                 : defaultMachineOutputRules[action.Id];
-
-            this.Monitor.Log($"{action.Id} set to {action.MinutesUntilReady}.", LogLevel.Debug);
         }
 
         private bool GetConfigValue(string actionId)
