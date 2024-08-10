@@ -1,0 +1,10 @@
+{
+    "Name": "SmeltIt",
+    "Author": "BruceBC",
+    "Version": "1.0.0",
+    "Description": "Literally, pineapples everywhere.",
+    "UniqueID": "BruceBC.SmeltIt",
+    "EntryDll": "SmeltIt.dll",
+    "MinimumApiVersion": "4.0.0",
+    "UpdateKeys": []
+  }
