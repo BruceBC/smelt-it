@@ -2,7 +2,7 @@
     "Name": "SmeltIt",
     "Author": "BruceBC",
     "Version": "1.0.0",
-    "Description": "Literally, pineapples everywhere.",
+    "Description": "Instantly smelt resources and recycle trash.",
     "UniqueID": "BruceBC.SmeltIt",
     "EntryDll": "SmeltIt.dll",
     "MinimumApiVersion": "4.0.0",
