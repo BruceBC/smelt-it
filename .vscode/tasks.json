@@ -41,6 +41,8 @@
         "type": "process",
         "args": [
           "publish",
+          "-c",
+          "Release",
           "${workspaceFolder}/SmeltIt/SmeltIt.csproj",
           "/property:GenerateFullPaths=true",
           "/consoleloggerparameters:NoSummary"
