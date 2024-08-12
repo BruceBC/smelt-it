@@ -1,7 +1,7 @@
 {
     "Name": "SmeltIt",
     "Author": "BruceBC",
-    "Version": "1.0.0",
+    "Version": "1.0.1",
     "Description": "Instantly smelt resources and recycle trash.",
     "UniqueID": "BruceBC.SmeltIt",
     "EntryDll": "SmeltIt.dll",
