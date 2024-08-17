@@ -96,4 +96,11 @@ public sealed class ModConfig
         tooltip: "Instantly recycle soggy newspaper in the recyling machine."
     )]
     public bool InstantSoggyNewspaper { get; set; } = true;
+
+    [ConfigOption(
+        fieldId: "Default",
+        name: "Instant Coal",
+        tooltip: "Instantly turns 10 pieces of wood into one piece of coal."
+    )]
+    public bool InstantCoal { get; set; } = true;
 }

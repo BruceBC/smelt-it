@@ -54,9 +54,18 @@ namespace SmeltIt.API
         ///             <term>(BC)20</term>
         ///             <description>Recyling Machine</description>
         ///         </item>
+        ///         <item>
+        ///             <term>(BC)114</term>
+        ///             <description>Charcoal Kiln</description>
+        ///         </item>
         ///     </list>
         /// </remarks>
-        private static List<string> machineIds = new List<string>() { "(BC)13", "(BC)20" };
+        private static List<string> machineIds = new List<string>()
+        {
+            "(BC)13",
+            "(BC)20",
+            "(BC)114"
+        };
 
         /// <summary>
         /// Edits a machine asset.
