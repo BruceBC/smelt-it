@@ -51,20 +51,50 @@ namespace SmeltIt.API
         ///             <description>Furnace</description>
         ///         </item>
         ///         <item>
+        ///             <term>(BC)15</term>
+        ///             <description>Preserves Jar</description>
+        ///         </item>
+        ///         <item>
+        ///             <term>(BC)16</term>
+        ///             <description>Cheese Press</description>
+        ///         </item>
+        ///         <item>
+        ///             <term>(BC)19</term>
+        ///             <description>Oil Maker</description>
+        ///         </item>
+        ///         <item>
         ///             <term>(BC)20</term>
         ///             <description>Recyling Machine</description>
         ///         </item>
         ///         <item>
+        ///             <term>(BC)24</term>
+        ///             <description>Mayonnaise Machine</description>
+        ///         </item>
+        ///         <item>
+        ///             <term>(BC)25</term>
+        ///             <description>Seed Maker</description>
+        ///         </item>
+        ///         <item>
         ///             <term>(BC)114</term>
         ///             <description>Charcoal Kiln</description>
+        ///         </item>
+        ///         <item>
+        ///             <term>(BC)FishSmoker</term>
+        ///             <description>Fisher Smoker</description>
         ///         </item>
         ///     </list>
         /// </remarks>
         private static List<string> machineIds = new List<string>()
         {
             "(BC)13",
+            "(BC)15",
+            "(BC)16",
+            "(BC)19",
             "(BC)20",
-            "(BC)114"
+            "(BC)24",
+            "(BC)25",
+            "(BC)114",
+            "(BC)FishSmoker"
         };
 
         /// <summary>
@@ -74,7 +104,7 @@ namespace SmeltIt.API
         /// <param name="onEditMachineOutputRule">The callback to edit the MachineOutputRule.</param>
         internal static void EditAssets(
             IAssetData asset,
-            Action<MachineOutputRule> onEditMachineOutputRule
+            Action<string, MachineOutputRule> onEditMachineOutputRule
         )
         {
             var data = asset.AsDictionary<string, MachineData>().Data;
@@ -82,7 +112,7 @@ namespace SmeltIt.API
             foreach ((string itemID, MachineData itemData) in data)
             {
                 if (machineIds.Contains(itemID))
-                    itemData.OutputRules.ForEach(onEditMachineOutputRule);
+                    itemData.OutputRules.ForEach(rule => onEditMachineOutputRule(itemID, rule));
             }
         }
     }

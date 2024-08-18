@@ -82,17 +82,21 @@ namespace SmeltIt
         /// Change the MachineOutputRule to be instantaneous when the config value is set or
         /// defaulted to its original value when not set.
         /// </summary>
+        /// <param name="itemId">The id of the item.</param>
         /// <param name="rule">The MachineOutputRule.</param>
-        private void OnEditMachineOutputRule(MachineOutputRule rule)
+        private void OnEditMachineOutputRule(string itemId, MachineOutputRule rule)
         {
-            // Dynamically add a shallow copy of the machine output rule
+            // Set globally unique id
+            rule.SetGlobalID(itemId);
+
+            // Dynamically adds a shallow copy of the machine output rule
             var defaultRule = rule.ShallowClone();
             defaultRules.Add(defaultRule.Id, defaultRule);
 
             // Set MinutesUntilReady to be 0 or to default
             Bridge.SetMinutesUntilReady(this.Config, rule, defaultRule);
 
-            // Store a reference to the rule, so that we can modify it later if the config changes
+            // Add machine output rule
             rules.Add(rule.Id, rule);
         }
     }
