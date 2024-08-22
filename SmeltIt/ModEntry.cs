@@ -1,9 +1,15 @@
 using Force.DeepCloner;
+using Microsoft.Xna.Framework;
 using SmeltIt.API;
 using SmeltIt.Extensions;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
+using StardewValley;
+using StardewValley.Extensions;
+using StardewValley.GameData.FruitTrees;
 using StardewValley.GameData.Machines;
+using StardewValley.GameData.WildTrees;
+using StardewValley.TerrainFeatures;
 
 namespace SmeltIt
 {
@@ -31,6 +37,7 @@ namespace SmeltIt
         {
             this.Config = this.Helper.ReadConfig<ModConfig>();
             helper.Events.GameLoop.GameLaunched += this.OnGameLaunched;
+            helper.Events.GameLoop.DayStarted += this.OnDayStarted;
             helper.Events.Content.AssetRequested += this.OnAssetRequested;
         }
 
@@ -44,6 +51,72 @@ namespace SmeltIt
         {
             // Register with Generic Mod Config Menu's API
             Configurator.Register(this.Config, this.Helper, this.ModManifest, this.OnConfigSave);
+        }
+
+        private void OnDayStarted(object? sender, DayStartedEventArgs e)
+        {
+            if (Context.IsMainPlayer)
+            {
+                Utility.ForEachLocation(location =>
+                {
+                    foreach (
+                        (Vector2 tile, TerrainFeature feature) in location.terrainFeatures.Pairs
+                    )
+                    {
+                        // TODO: Add config for fruit trees to instantly grow max number of fruit
+                        if (feature is FruitTree fruitTree)
+                        {
+                            // var treeId = fruitTree.treeId;
+                            bool canAddMoreFruit =
+                                fruitTree.fruit.Count < FruitTree.maxFruitsOnTrees;
+                            while (canAddMoreFruit)
+                            {
+                                canAddMoreFruit = fruitTree.TryAddFruit();
+                            }
+                        }
+
+                        if (feature is Tree tree && tree.tapped.Value)
+                        {
+                            StardewValley.Object objectAtTile = location.getObjectAtTile(
+                                (int)tile.X,
+                                (int)tile.Y
+                            );
+                            var treeType = tree.treeType.Value;
+
+                            if (objectAtTile.IsTapper())
+                            {
+                                // Update to instantly complete
+                                StardewValley.Object tapper = objectAtTile;
+
+                                // TODO: Extend tree to have a GlobalID
+                                var globalId = $"{tapper.QualifiedItemId}:{tree.treeType.Value}";
+                                var configValue = Configurator.GetConfigValue(
+                                    this.Config,
+                                    globalId
+                                );
+                                if (configValue)
+                                {
+                                    tapper.MinutesUntilReady = 0;
+                                    tapper.minutesElapsed(0);
+                                }
+                            }
+                        }
+                    }
+
+                    return true;
+                });
+            }
+            else
+            {
+                this.Monitor.Log(
+                    "Disabled instant fruit mod; only works for the main player in multiplayer.",
+                    LogLevel.Warn
+                );
+                this.Monitor.Log(
+                    "Disabled instant tapper mod; only works for the main player in multiplayer.",
+                    LogLevel.Warn
+                );
+            }
         }
 
         /// <summary>

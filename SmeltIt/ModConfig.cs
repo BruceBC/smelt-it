@@ -1,4 +1,5 @@
 using SmeltIt.Decorators;
+using StardewValley.TerrainFeatures;
 
 /// <summary>
 /// A list of options that can be configured by the mod.
@@ -16,6 +17,7 @@ public sealed class ModConfig
     private const string recylingMachineId = "(BC)20";
     private const string mayonnaiseMachineId = "(BC)24";
     private const string seedMakerId = "(BC)25";
+    private const string tapperId = "(BC)105";
     private const string charcoalKilnId = "(BC)114";
     private const string fishSmokerId = "(BC)FishSmoker";
 
@@ -299,4 +301,50 @@ public sealed class ModConfig
         tooltip: "Instantly smokes fish."
     )]
     public bool InstantSmokedFish { get; set; } = true;
+
+    /*********
+    ** Tapper
+    *********/
+
+    [ConfigOption(
+        fieldId: $"{tapperId}:{Tree.bushyTree}",
+        name: "Instant Oak Tapper",
+        tooltip: "Instantly taps oak trees every morning."
+    )]
+    public bool InstantOakTapper { get; set; } = true;
+
+    [ConfigOption(
+        fieldId: $"{tapperId}:{Tree.leafyTree}",
+        name: "Instant Maple Tapper",
+        tooltip: "Instantly taps maple trees every morning."
+    )]
+    public bool InstantMapleTapper { get; set; } = true;
+
+    [ConfigOption(
+        fieldId: $"{tapperId}:{Tree.pineTree}",
+        name: "Instant Pine Tapper",
+        tooltip: "Instantly taps pine trees every morning."
+    )]
+    public bool InstantPineTapper { get; set; } = true;
+
+    [ConfigOption(
+        fieldId: $"{tapperId}:{Tree.mushroomTree}",
+        name: "Instant Mushroom Tapper",
+        tooltip: "Instantly taps mushroom trees every morning."
+    )]
+    public bool InstantMushroomTapper { get; set; } = true;
+
+    [ConfigOption(
+        fieldId: $"{tapperId}:{Tree.mysticTree}",
+        name: "Instant Mystic Tapper",
+        tooltip: "Instantly taps mystic trees every morning."
+    )]
+    public bool InstantMysticTapper { get; set; } = true;
+
+    [ConfigOption(
+        fieldId: $"{tapperId}:{Tree.greenRainTreeFern}",
+        name: "Instant Green Rain Tree Tapper",
+        tooltip: "Instantly taps green rain (type 3) trees every morning."
+    )]
+    public bool InstantGreenRainTreeTapper { get; set; } = true;
 }
