@@ -79,6 +79,10 @@ namespace SmeltIt.API
         ///             <description>Charcoal Kiln</description>
         ///         </item>
         ///         <item>
+        ///             <term>(BC)BaitMaker</term>
+        ///             <description>Bait Maker</description>
+        ///         </item>
+        ///         <item>
         ///             <term>(BC)FishSmoker</term>
         ///             <description>Fisher Smoker</description>
         ///         </item>
@@ -94,6 +98,7 @@ namespace SmeltIt.API
             "(BC)24",
             "(BC)25",
             "(BC)114",
+            "(BC)BaitMaker",
             "(BC)FishSmoker"
         };
 

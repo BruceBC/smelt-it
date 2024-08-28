@@ -19,6 +19,7 @@ public sealed class ModConfig
     private const string seedMakerId = "(BC)25";
     private const string tapperId = "(BC)105";
     private const string charcoalKilnId = "(BC)114";
+    private const string baitMakerId = "(BC)BaitMaker";
     private const string fishSmokerId = "(BC)FishSmoker";
 
     /*********
@@ -290,6 +291,17 @@ public sealed class ModConfig
         tooltip: "Instantly turns crops into seeds."
     )]
     public bool InstantSeedMaker { get; set; } = true;
+
+    /*********
+    ** Bait Maker
+    *********/
+
+    [ConfigOption(
+        fieldId: $"{baitMakerId}:Default",
+        name: "Instant Bait Maker",
+        tooltip: "Instantly makes targeted bait."
+    )]
+    public bool InstantBaitMaker { get; set; } = true;
 
     /*********
     ** Fish Smoker
