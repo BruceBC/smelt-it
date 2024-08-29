@@ -15,12 +15,14 @@ public sealed class ModConfig
     private const string cheesePressId = "(BC)16";
     private const string oilMakerId = "(BC)19";
     private const string recylingMachineId = "(BC)20";
+    private const string crystalariumId = "(BC)21";
     private const string mayonnaiseMachineId = "(BC)24";
     private const string seedMakerId = "(BC)25";
     private const string tapperId = "(BC)105";
     private const string charcoalKilnId = "(BC)114";
     private const string baitMakerId = "(BC)BaitMaker";
     private const string fishSmokerId = "(BC)FishSmoker";
+    private const string prismaticShardId = "(O)74";
 
     /*********
     ** Furnace
@@ -120,6 +122,17 @@ public sealed class ModConfig
         tooltip: "Instantly recycle soggy newspaper in the recyling machine."
     )]
     public bool InstantSoggyNewspaper { get; set; } = true;
+
+    /*********
+    ** Crystalarium
+    *********/
+
+    [ConfigOption(
+        fieldId: crystalariumId,
+        name: "Instant Crystalarium",
+        tooltip: "Instantly duplicates minerals."
+    )]
+    public bool InstantCrystalarium { get; set; } = true;
 
     /*********
     ** Charcoal Kiln
@@ -359,4 +372,15 @@ public sealed class ModConfig
         tooltip: "Instantly taps green rain (type 3) trees every morning."
     )]
     public bool InstantGreenRainTreeTapper { get; set; } = true;
+
+    /*********
+    ** Cloneable Crystalarium Items
+    *********/
+
+    [ConfigOption(
+        fieldId: prismaticShardId,
+        name: "Clone Prismatic Shard",
+        tooltip: "Enables prismatic shard to be cloned in the crystalarium."
+    )]
+    public bool ClonePrismaticShard { get; set; } = true;
 }

@@ -1,5 +1,6 @@
 using SmeltIt.Extensions;
 using StardewModdingAPI;
+using StardewValley;
 using StardewValley.GameData.Machines;
 
 namespace SmeltIt.API
@@ -31,13 +32,24 @@ namespace SmeltIt.API
         // Updates minutes until ready
 
         /// <summary>
-        /// Set the MinutesUntilReady propert on a given rule.
+        /// Set the MinutesUntilReady property on a given rule.
         /// </summary>
         /// <param name="rule">The MachineOutputRule.</param>
         /// <param name="minutesUntilReady">The MinutesUntilReady property that will be updated.</param>
         internal static void SetRule(MachineOutputRule rule, int minutesUntilReady)
         {
             rule.MinutesUntilReady = minutesUntilReady;
+        }
+
+        /// <summary>
+        /// Sets the MinutesUntilReady property on the machine and calls minutesElapsed to apply the change immediately.
+        /// </summary>
+        /// <param name="machine">The Machine.</param>
+        /// <param name="minutesUntilReady">The MinutesUntilReady property that will be updated.</param>
+        internal static void SetMachine(StardewValley.Object machine, int minutesUntilReady)
+        {
+            machine.MinutesUntilReady = minutesUntilReady;
+            machine.minutesElapsed(minutesUntilReady);
         }
 
         /// <summary>
@@ -88,7 +100,7 @@ namespace SmeltIt.API
         ///         </item>
         ///     </list>
         /// </remarks>
-        private static List<string> machineIds = new List<string>()
+        private static List<string> machineAssetIds = new List<string>()
         {
             "(BC)13",
             "(BC)15",
@@ -114,10 +126,38 @@ namespace SmeltIt.API
         {
             var data = asset.AsDictionary<string, MachineData>().Data;
 
-            foreach (string itemId in machineIds)
+            foreach (string itemId in machineAssetIds)
             {
                 var itemData = data[itemId];
                 itemData.OutputRules.ForEach(rule => onEditMachineOutputRule(itemId, rule));
+            }
+        }
+
+        /// <summary>
+        /// The list of machine ids that will be modded. Only machines that do not fully support MachineOutputRules,
+        /// such as the Crystalarium, should be added here.
+        /// </summary>
+        /// <remarks>
+        /// Add any new machine ids here.
+        ///     <list type="bullet">
+        ///         <item>
+        ///             <term>(BC)21</term>
+        ///             <description>Crystalarium</description>
+        ///         </item>
+        ///     </list>
+        /// </remarks>
+        private static List<string> machineIds = new List<string>() { "(BC)21" };
+
+        internal static void EditMachine(
+            StardewValley.Object machine,
+            Action<StardewValley.Object> onEditMachine,
+            Action<StardewValley.Object>? onMachineSideEffects = null
+        )
+        {
+            if (machineIds.Contains(machine.QualifiedItemId))
+            {
+                onEditMachine(machine);
+                onMachineSideEffects?.Invoke(machine);
             }
         }
     }
