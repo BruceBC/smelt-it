@@ -114,10 +114,10 @@ namespace SmeltIt.API
         {
             var data = asset.AsDictionary<string, MachineData>().Data;
 
-            foreach ((string itemID, MachineData itemData) in data)
+            foreach (string itemId in machineIds)
             {
-                if (machineIds.Contains(itemID))
-                    itemData.OutputRules.ForEach(rule => onEditMachineOutputRule(itemID, rule));
+                var itemData = data[itemId];
+                itemData.OutputRules.ForEach(rule => onEditMachineOutputRule(itemId, rule));
             }
         }
     }
