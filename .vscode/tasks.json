@@ -44,10 +44,16 @@
           "-c",
           "Release",
           "${workspaceFolder}/SmeltIt/SmeltIt.csproj",
+          "-o",
+          "${projectFolder}/bin/${configuration}/${framework}",
+          "--",
           "/property:GenerateFullPaths=true",
           "/consoleloggerparameters:NoSummary"
         ],
-        "problemMatcher": "$msCompile"
+        "problemMatcher": "$msCompile",
+        "group": {
+          "kind": "build"        
+        }
       },
       {
         "label": "watch",
